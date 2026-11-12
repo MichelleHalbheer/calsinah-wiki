@@ -17,7 +17,7 @@ if quartz.exists():
 quartz.mkdir(parents=True)
 
 for folder in include_folders:
-    src = vault / folder
+    src = vault.joinpath(folder)
 
     for file in src.rglob("*.md"):
 
@@ -39,7 +39,7 @@ for folder in include_folders:
 
         rel = file.relative_to(vault)
 
-        target = quartz / rel
+        target = quartz.joinpath(rel)
 
         target.parent.mkdir(
             parents=True,
