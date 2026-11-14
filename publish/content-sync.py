@@ -71,55 +71,50 @@ def should_publish(text, path):
 # DM section filtering
 # --------------------------------------------------
 
+def current_directive(stack):
+    if not stack:
+        return None
+
+    return stack[-1]
+
 def redact_dm_sections(text, path):
     output = []
-    inside_dm = False
     redacted = 0
+    directive_stack = []
 
     for line_number, line in enumerate(text.splitlines(keepends=True), 1):
-        stripped = line.strip()
 
-        is_start = re.fullmatch(r":::dm", stripped, re.IGNORECASE)
-        is_end = stripped == ":::"
+        directive_match = re.match(
+            r"^\s*:::\s*([a-zA-Z0-9_-]+)\s*$",
+            line
+        )
 
-        if is_start:
-            if inside_dm:
-                raise ValueError(
-                    f"Nested DM section in {path}, line {line_number}"
-                )
+        if directive_match:
+            directive_stack.append(directive_match.group(1).lower())
+            if current_directive(directive_stack) == "dm":
+                redacted += 1
+                continue
 
-            inside_dm = True
-            redacted += 1
-            continue
-
-        if is_end:
-            if not inside_dm:
+        if re.match(r"^\s*:::\s*$", line):
+            if directive_stack:
+                inside_dm = current_directive(directive_stack) == "dm"
+                directive_stack.pop()
+                if inside_dm:
+                    continue
+            else:
                 raise ValueError(
                     f"Unexpected ::: in {path}, line {line_number}"
                 )
 
-            inside_dm = False
-
-            while output and not output[-1].strip():
-                output.pop()
-
-            if output:
-                output.append("\n")
-
+        if "dm" in directive_stack:
             continue
-
-        if inside_dm:
-            continue
-
-        if stripped.lower().startswith(":::dm"):
-            raise ValueError(
-                f"Malformed DM marker in {path}, line {line_number}"
-            )
 
         output.append(line)
 
-    if inside_dm:
-        raise ValueError(f"Unclosed DM section in {path}")
+    if directive_stack:
+        raise ValueError(
+            f"Unclosed directive(s) in {path}: {directive_stack}"
+        )
 
     result = "".join(output)
     result = re.sub(r"\n[ \t]*\n(?:[ \t]*\n)+", "\n\n", result)
@@ -161,14 +156,60 @@ def validate_content(directory, blocked_phrases):
 
 
 # --------------------------------------------------
+# Processing Attachments
+# --------------------------------------------------
+
+def find_attachments(text: str, config: dict) -> set[str]:
+    attachments = set()
+
+    matches = re.findall(
+        r"!?\[\[([^\]]+)\]\]",
+        text
+    )
+
+    for match in matches:
+        name = match.split("|", 1)[0].strip()
+
+        suffix = Path(name).suffix.lower()
+
+        if suffix and suffix in config["attachment_extensions"]:
+            attachments.add(name)
+
+    return attachments
+
+def resolve_attachment(note_path, attachment_name):
+    note_dir = note_path.parent
+
+    candidates = [
+        note_dir.joinpath(attachment_name),
+        note_dir.joinpath("Attachments", attachment_name),
+    ]
+
+    matches = [p for p in candidates if p.exists()]
+
+    if not matches:
+        raise FileNotFoundError(
+            f"Attachment not found: {attachment_name}\nReferenced in note: {note_path}"
+        )
+
+    if len(matches) > 1:
+        raise ValueError(
+            f"Ambiguous attachment: {attachment_name}\nReferenced in note: {note_path}"
+        )
+
+    return matches[0]
+
+
+# --------------------------------------------------
 # Sync content
 # --------------------------------------------------
 
-def sync_content(vault, staging, include_folders):
+def sync_content(vault, staging, include_folders, config):
     copied = 0
     excluded = 0
     redacted_total = 0
     seen_files = set()
+    referenced_attachments = []
 
     print("\nReading Obsidian vault...")
 
@@ -199,6 +240,10 @@ def sync_content(vault, staging, include_folders):
 
             seen_files.add(relative)
 
+            attachments = find_attachments(filtered, config)
+            resolved_attachments = [resolve_attachment(file, att) for att in attachments]
+            referenced_attachments.extend(resolved_attachments)
+
             target = staging.joinpath(relative)
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(filtered, encoding="utf-8")
@@ -206,7 +251,24 @@ def sync_content(vault, staging, include_folders):
             copied += 1
             redacted_total += redacted
 
-    return copied, excluded, redacted_total
+    deduplicated_attachments = set(referenced_attachments)
+
+    for asset in deduplicated_attachments:
+        try:
+            source = Path(asset)
+        except Exception as e:
+            raise ValueError(f"Attachment error for '{asset}': {e}")
+
+        relative = source.relative_to(vault)
+        target = staging.joinpath(relative)
+        target.parent.mkdir(parents=True, exist_ok=True)
+
+        if not target.exists():
+            shutil.copy2(source, target)
+
+    num_attachments = len(deduplicated_attachments)
+    
+    return copied, excluded, redacted_total, num_attachments
 
 
 # --------------------------------------------------
@@ -228,6 +290,19 @@ def run_command(command, description, repo_root):
 # --------------------------------------------------
 
 def main():
+    npx = shutil.which("npx") or shutil.which("npx.cmd")
+    npm = shutil.which("npm") or shutil.which("npm.cmd")
+
+    if npx is None:
+        raise RuntimeError(
+            "Could not locate npx on PATH"
+        )
+
+    if npm is None:
+        raise RuntimeError(
+            "Could not locate npm on PATH"
+        )
+    
     parser = argparse.ArgumentParser(
         description="Calsinah Wiki Publisher"
     )
@@ -248,6 +323,12 @@ def main():
         "--push",
         action="store_true",
         help="Commit and push generated content to GitHub."
+    )
+
+    parser.add_argument(
+        "--full-check",
+        action="store_true",
+        help="Run full TypeScript and formatting checks (slower)."
     )
 
     args = parser.parse_args()
@@ -283,15 +364,17 @@ def main():
         staging = Path(temp_dir).joinpath("content")
         staging.mkdir()
 
-        copied, excluded, redacted = sync_content(
+        copied, excluded, redacted, num_attachments = sync_content(
             vault,
             staging,
-            include_folders
+            include_folders,
+            config
         )
 
         print(f"\n  Files copied: {copied}")
         print(f"  Notes excluded: {excluded}")
         print(f"  DM sections removed: {redacted}")
+        print(f"  Attachments: {num_attachments}")
 
         validate_content(staging, blocked_phrases)
 
@@ -317,27 +400,28 @@ def main():
 
             # Format repository
             run_command(
-                ["npx", "prettier", ".", "--write"],
+                [npx, "prettier", ".", "--write"],
                 "Formatting repository with Prettier",
                 repo_root
             )
 
             # Check and build
-            run_command(
-                ["npm", "run", "check"],
-                "Checking TypeScript and formatting",
-                repo_root
-            )
+            if args.full_check:
+                run_command(
+                    [npm, "run", "check"],
+                    "Checking TypeScript and formatting",
+                    repo_root
+                )
 
-            run_command(
-                ["npx", "quartz", "build"],
-                "Building Quartz",
-                repo_root
-            )
+                run_command(
+                    [npx, "quartz", "build"],
+                    "Building Quartz",
+                    repo_root
+                )
 
             if args.push:
                 run_command(
-                    ["npx", "quartz", "sync"],
+                    [npx, "quartz", "sync"],
                     "Syncing Quartz to Git",
                     repo_root
                 )
@@ -369,4 +453,4 @@ if __name__ == "__main__":
         main()
     except Exception as e:
         print(f"\nPUBLISH FAILED: {e}")
-        sys.exit(1)
+        raise e

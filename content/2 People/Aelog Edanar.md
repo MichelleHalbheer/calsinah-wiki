@@ -23,7 +23,6 @@ tags:
 
 ## Personality
 
-
 ## Relationships
 
 ### Allies
