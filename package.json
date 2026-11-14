@@ -21,7 +21,10 @@
     "install-plugins": "npx tsx ./quartz/plugins/loader/install-plugins.ts",
     "prebuild": "npm run install-plugins",
     "changeset": "changeset",
-    "version-packages": "changeset version && npm install --package-lock-only --ignore-scripts --no-audit --no-fund"
+    "version-packages": "changeset version && npm install --package-lock-only --ignore-scripts --no-audit --no-fund",
+    "publish-content": "publish\\venv\\Scripts\\python.exe publish\\content-sync.py --full-check --push",
+    "publish-dry": "publish\\venv\\Scripts\\python.exe publish\\content-sync.py --dry-run --full-check",
+    "publish-local": "publish\\venv\\Scripts\\python.exe publish\\content-sync.py --no-push --full-check"
   },
   "engines": {
     "npm": ">=10.9.2",

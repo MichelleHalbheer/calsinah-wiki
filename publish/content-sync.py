@@ -235,16 +235,28 @@ def sync_content(vault, staging, include_folders, config):
             filtered, redacted = redact_dm_sections(text, file)
             relative = file.relative_to(vault)
 
-            if relative in seen_files:
-                raise ValueError(f"Duplicate file: {relative}")
+            target_relative = relative
 
-            seen_files.add(relative)
+            root_folders = config.get("root_folders", [])
+            if root_folders:
+                for root in root_folders:
+                    try:
+                        target_relative = relative.relative_to(root)
+                        break
+                    except ValueError:
+                        continue
+
+
+            if target_relative in seen_files:
+                raise ValueError(f"Duplicate file: {target_relative}")
+
+            seen_files.add(target_relative)
 
             attachments = find_attachments(filtered, config)
             resolved_attachments = [resolve_attachment(file, att) for att in attachments]
             referenced_attachments.extend(resolved_attachments)
 
-            target = staging.joinpath(relative)
+            target = staging.joinpath(target_relative)
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(filtered, encoding="utf-8")
 
