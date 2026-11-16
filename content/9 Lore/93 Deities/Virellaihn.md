@@ -32,22 +32,6 @@ His three aspects are known as the Pup, the Alpha and the Ancient, each with the
 
 Virellaihn's symbol is that of three overlapping circles of different sizes.
 
-## The Pup
-
-The Pup is tied to Limihn, the first and smallest moon of Calsinah, which traverses the night sky quickly, like a young wolf would. It represents life, innocence and the rising tides.
-
-When Limihn fell following the Moonstrike, it is said that the power of the Pup faded, which was why the loss of life in the ensuing Age of Darkness was so great. The fall of Limihn and the fading of the Pup are seen as symbols of shattered innocence and the dangers of unchecked ambition.
-
-Worshippers of the pup still get their divine powers from Vierllaihn and continue to uphold their beliefs with regard to the pups ideal. When Virellaihn himself interjects, though, it is only with his two other aspects, changing the way he interacts with his followers.
-
-## The Alpha
-
-The Alpha is tied to Corudahn, the third and largest moon, which dominates the night sky. It shows Virellaihn in his prime, representing growth, power, protection and the high tide.
-
-## The Ancient
-
-The Ancient is tied to Tharell, the second and smallest moon of Calsinah. It is the incarnation of wisdom, endings and the falling tide.
-
 ### Titles
 
 - The Triple Fang
@@ -64,6 +48,22 @@ dv.list(domains);
 
 ## Symbolism
 
+### The Pup
+
+The Pup is tied to [[Limihn]], the first and smallest moon of Calsinah, which traverses the night sky quickly, like a young wolf would. It represents life, innocence and the rising tides.
+
+When Limihn fell following [[The Moonstrike]], it is said that the power of the Pup faded, which was why the loss of life in the ensuing [[The Age of Darkness|Age of Darkness]] was so great. The [[Fall of Limihn]] and the fading of the Pup are seen as symbols of shattered innocence and the dangers of unchecked ambition.
+
+Worshippers of the pup still get their divine powers from Vierllaihn and continue to uphold their beliefs with regard to the pups ideal. When Virellaihn himself interjects, though, it is only with his two other aspects, changing the way he interacts with his followers.
+
+### The Alpha
+
+The Alpha is tied to [[Corudahn]], the third and largest moon, which dominates the night sky. It shows Virellaihn in his prime, representing growth, power, protection and the high tide.
+
+### The Ancient
+
+The Ancient is tied to [[Tharell]], the second and smallest moon of Calsinah. It is the incarnation of wisdom, endings and the falling tide.
+
 ## Worship
 
 ## Clergy
@@ -75,7 +75,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

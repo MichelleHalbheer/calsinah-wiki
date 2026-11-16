@@ -25,7 +25,7 @@ tags:
 
 ![[20250905_2212_Tamed Red Locks_remix_01k4dr0jp0ezebkak80qsmracf.jpg]]
 
-Melora is the keeper of the wilderness, and represents the wild creatures of nature, natural beauty and fresh water. Meloras druids and the clerics of her lover [[9 Lore/93 Deities/Tyrael]] work together to ensure balance between nature and civilization. If that balance is upset, the pair grows furious, with their fury manifesting as natural disasters. Melora is often worshipped through carvings and depictions in groves or other wild places, but occasionally also blesses the construction of a temple in a population center, often in ones where the inhabitants live in unison with natures.
+Melora is the keeper of the wilderness, and represents the wild creatures of nature, natural beauty and fresh water. Meloras druids and the clerics of her lover [[Tyrael]] work together to ensure balance between nature and civilization. If that balance is upset, the pair grows furious, with their fury manifesting as natural disasters. Melora is often worshipped through carvings and depictions in groves or other wild places, but occasionally also blesses the construction of a temple in a population center, often in ones where the inhabitants live in unison with natures.
 
 ### Titles
 
@@ -54,7 +54,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

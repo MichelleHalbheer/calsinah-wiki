@@ -50,7 +50,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

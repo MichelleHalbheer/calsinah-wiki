@@ -111,7 +111,7 @@ plugins:
     options:
       theme: its-theme
       mode: both
-      variation: ttrpg-dnd
+      variation: ttrpg-wotc
   - source: "@quartz-community/explicit-publish"
     enabled: false
   - source: "@quartz-community/unlisted-pages"

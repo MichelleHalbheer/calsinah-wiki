@@ -25,7 +25,7 @@ tags:
 
 Erathis is the goddess of civilisation, inventions and the law. She is primarily worshipped by rulers, judges and pioneers. She has temples in most major cities.
 
-Erathis is married to [[9 Lore/93 Deities/Pelor]] and has close relations with [[9 Lore/93 Deities/Moradin]] and [[9 Lore/93 Deities/Ioun]]. She is one of the few deities still on cordial terms with [[9 Lore/93 Deities/Asmodeus]], as she views his tyrannical rule as a form of law and civilisation, despite not agreeing with his methods.
+Erathis is married to [[Pelor]] and has close relations with [[Moradin]] and [[Ioun]]. She is one of the few deities still on cordial terms with [[Asmodeus]], as she views his tyrannical rule as a form of law and civilisation, despite not agreeing with his methods.
 
 ### Titles
 
@@ -52,7 +52,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

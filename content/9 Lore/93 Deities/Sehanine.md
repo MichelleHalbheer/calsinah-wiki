@@ -22,7 +22,7 @@ tags:
 
 ## Overview
 
-Sehanine, or fully Sehanine Moonbow, is the elven goddess of the moon, dreams, heavens, and journeys. Sometimes, death is also seen as one of her domains. She is one of the most powerful elven deities. She is the fey aspect of [[9 Lore/93 Deities/Selûne]], though she is powerful enough to be viewed as an independent goddess, especially following the clearer division of races during the [category:aef105ce-a6b5-44fe-9977-dba47cbf5feb]. Sehanine is known to take a male form on occasion. She is the lover of [[9 Lore/93 Deities/Corellon]].
+Sehanine, or fully Sehanine Moonbow, is the elven goddess of the moon, dreams, heavens, and journeys. Sometimes, death is also seen as one of her domains. She is one of the most powerful elven deities. She is the fey aspect of [[Selûne]], though she is powerful enough to be viewed as an independent goddess, especially following the clearer division of races during the [[The Age of Darkness]]. Sehanine is known to take a male form on occasion. She is the lover of [[Corellon]].
 
 ### Titles
 
@@ -52,7 +52,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

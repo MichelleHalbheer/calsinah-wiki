@@ -20,7 +20,7 @@ tags:
 
 ## Overview
 
-Tharizdun is the god of madness and eternal darkness. From the moment he arrived on Calsinah, he sought to destroy it and plunge it into eternal darkness. During [category:777e6173-faab-4e4c-91f6-164c5b2556fa] he created the Abyss, and converged it with the Material Plane. For this he was imprisoned by the deities of [[the High Pantheon]] and to this day he is chained within the Abyss. Tharizdun's followers seek to release him from his prison and unleash him upon Calsinah once more.
+Tharizdun is the god of madness and eternal darkness. From the moment he arrived on Calsinah, he sought to destroy it and plunge it into eternal darkness. During [[The Second Sundering]] he created the [[Abyss]], and converged it with the [[Material Plane]]. For this he was imprisoned by the deities of [[the High Pantheon]] and to this day he is chained within the Abyss. Tharizdun's followers seek to release him from his prison and unleash him upon Calsinah once more.
 
 ### Titles
 
@@ -49,7 +49,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

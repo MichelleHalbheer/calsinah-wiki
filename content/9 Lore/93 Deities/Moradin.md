@@ -23,7 +23,7 @@ tags:
 
 ![[20250906_1611_Glowing Forge Workpiece_remix_01k4fnrgqke7e8hf728dmm7pkt.jpg]]
 
-Moradin is the patron god of the dwarves and the chief deity of the dwarven pantheon. Moradin is viewed as strength incarnate and force of will embodied. He defends his creations, the dwarves, fiercely and judges them by their work first and their intentions second. He is a large inspiration for dwarven inventions and constantly seeks to improve their race. He also encourages a good-natured, intelligent and harmonious coexistence with other good races, while constantly battling the pride and isolationist tendencies of the dwarves.
+Moradin is the patron god of the dwarves and the chief deity of the dwarven pantheon. Moradin is viewed as strength incarnate and force of will embodied. He defends his creations, the [[Dwarves]], fiercely and judges them by their work first and their intentions second. He is a large inspiration for dwarven inventions and constantly seeks to improve their race. He also encourages a good-natured, intelligent and harmonious coexistence with other good races, while constantly battling the pride and isolationist tendencies of the dwarves.
 
 ### Titles
 
@@ -52,7 +52,3 @@ dv.list(domains);
 ## Relationships
 
 ## History
-
-## Notes
-
-Imported from World Anvil on 2026-11-16.

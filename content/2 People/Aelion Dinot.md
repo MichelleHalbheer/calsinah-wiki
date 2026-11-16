@@ -1,6 +1,6 @@
 ---
 publish: true
-type: person
+type: "person"
 status: ally
 factions:
   - "[[Nebaron Temple of Virellaihn]]"
