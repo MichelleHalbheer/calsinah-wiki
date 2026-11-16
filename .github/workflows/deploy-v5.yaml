@@ -60,7 +60,7 @@ jobs:
         run: npm run check
 
       - name: Build Quartz
-        run: npx quartz build -d docs -v
+        run: npx quartz build -d content -v
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
