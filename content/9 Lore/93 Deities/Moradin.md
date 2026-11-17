@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:53
 ---
 
 # Moradin
-
-## Overview
 
 ![[20250906_1611_Glowing Forge Workpiece_remix_01k4fnrgqke7e8hf728dmm7pkt.jpg]]
 

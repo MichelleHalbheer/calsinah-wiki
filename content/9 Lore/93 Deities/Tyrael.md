@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:54
 ---
 
 # Tyrael
-
-## Overview
 
 ![[ChatGPT Image Sep 5, 2025, 10_31_11 PM.jpg]]
 

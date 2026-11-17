@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:52
 ---
 
 # Avandra
-
-## Overview
 
 Avandra is the godess of change and luck. She likes freedom, travel and adventure. While she does not have many temples or a large clergy dedicated to her worship, many shrines to Avandra dot the waysides. [[Halflings]], merchants and all types of adventurers and travellers are known to worship Avandra
 

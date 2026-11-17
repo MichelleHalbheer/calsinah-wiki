@@ -13,12 +13,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:53
 ---
 
 # Raven Queen
-
-## Overview
 
 The Raven Queen is the goddess of death, fate and winter. Despite her close relationship to death and the deities of [[The Circle of Relieve]], she never strayed from [[The High Pantheon]] during or after [[The Second Sundering]]. Despite this, she made the Shadowfell her home following the Shearing. The Raven Queen rarely manifests a physical form, instead often appearing in other ways. She is obsessed with collecting mementoes from significant events, as well as memories and fragments thereof. If a significant fragment of the past is believed lost, chances are the Raven Queen will know where it is or have collected it herself. She is often believed to be insane, but is a just deity.
 

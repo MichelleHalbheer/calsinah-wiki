@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:54
 ---
 
 # Zehir
-
-## Overview
 
 Zehir is the god of poisons, assassins and darkness. He is the creator of snakes and all serpent folk. Most of Zehir's followers were hunted and killed after being betrayed by the other deities of the [[Circle of Relieve]]. He entered a stasis and retreated to an outer plane, though it is not known to which. Ever since his followers have been searching for him and have been trying to wake him from his eternal slumber.
 

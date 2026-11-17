@@ -15,12 +15,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:53
 ---
 
 # Sehanine
-
-## Overview
 
 Sehanine, or fully Sehanine Moonbow, is the elven goddess of the moon, dreams, heavens, and journeys. Sometimes, death is also seen as one of her domains. She is one of the most powerful elven deities. She is the fey aspect of [[Selûne]], though she is powerful enough to be viewed as an independent goddess, especially following the clearer division of races during the [[The Age of Darkness]]. Sehanine is known to take a male form on occasion. She is the lover of [[Corellon]].
 

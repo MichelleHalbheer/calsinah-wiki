@@ -13,12 +13,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:53
 ---
 
 # Kord
-
-## Overview
 
 ![[20250905_1752_Kord's Electrifying Battle_simple_compose_01k4d96571fa3tcv31pa63yxcz.jpg]]
 

@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:52
 ---
 
 # Gruumsh
-
-## Overview
 
 ![[20250905_1739_Gruumsh Leads Orc Charge_simple_compose_01k4d8dm96eg88db3bwv49ae0j.png]]
 

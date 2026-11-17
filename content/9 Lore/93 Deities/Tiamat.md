@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:54
 ---
 
 # Tiamat
-
-## Overview
 
 Tiamat was created alongside her brother [[Bahamut]] from the elemental chaos at the dawn of Calsinah. She is the goddess of wealth, greed, and vengeance. She is also the mother and patron deity of chromatic dragons, which usually are evil and follow her example of inexorable vanity and greed. Since [[The First Sundering]] she has been locked into an eternal conflict with her brother Bahamut.
 

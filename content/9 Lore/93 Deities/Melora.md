@@ -16,12 +16,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:53
 ---
 
 # Melora
-
-## Overview
 
 ![[20250905_2212_Tamed Red Locks_remix_01k4dr0jp0ezebkak80qsmracf.jpg]]
 

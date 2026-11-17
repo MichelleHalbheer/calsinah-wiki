@@ -14,12 +14,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:52
 ---
 
 # Iahl
-
-## Overview
 
 ![[20250905_1031_Elven God of Progress_simple_compose_01k4cfx5kjeshsx37rk0j6s37q.jpg]]
 

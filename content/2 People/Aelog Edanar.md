@@ -1,6 +1,6 @@
 ---
 publish: true
-type: "person"
+type: person
 status: ally
 factions:
   - "[[Paladins of Sehanine]]"
@@ -15,6 +15,8 @@ first_appearance: "[[Session 0.5 - Prologue Caeli]]"
 last_appearance: "[[Session 0.5 - Prologue Caeli]]"
 tags:
   - person
+date-created: 2025-12-20T13:35
+date-updated: 2026-11-17T10:40
 ---
 
 # Aelog
@@ -22,6 +24,12 @@ tags:
 ## Look
 
 ## Personality
+
+### Voice & Roleplaying Notes
+
+- Accent:
+- Speech Pattern: Rough, deep
+- Common Phrases:
 
 ## Relationships
 

@@ -15,12 +15,11 @@ related_organizations: []
 related_locations: []
 tags:
   - deity
-  - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T10:52
 ---
 
 # Bane
-
-## Overview
 
 ![[20250905_1220_Bane's Dreaded March_simple_compose_01k4cp5nrgemkbsagz22mxv49k.jpg]]
 
