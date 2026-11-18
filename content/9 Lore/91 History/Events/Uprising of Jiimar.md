@@ -20,6 +20,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:03
 ---
 
 # Uprising of Jiimar
@@ -29,6 +31,7 @@ With the [[College of Ascendancy]] growing more and more powerful, the [[Triumvi
 In 431 BFL the arrest of several students of the College lead to student protests, which quickly escalated. Many faculty members, in particular the twelve heads of faculty - known as the twelve Ancients - supported the students in their protests, which resulted in the Triumvirate of Lysoov being removed from power by the Ancients in 429 BFL.
 
 The result was the establishment of the [[Congregate of Ancients]] as the new power of state. While the Triumvirate already aimed to improve the powers they wielded, the Congregate of Ancients had an agenda that pursued this goal far more ruthlessly.
+%%aat-event-end-of-body%%
 
 ## Causes
 

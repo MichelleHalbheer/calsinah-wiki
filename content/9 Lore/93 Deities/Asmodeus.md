@@ -14,7 +14,7 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:52
+date-updated: 2026-11-17T16:42
 ---
 
 # Asmodeus
@@ -35,10 +35,20 @@ Asmodeus, or **Asmodel** in Infernal is the god of tyranny and indulgence. He is
 ## Domains
 
 ```dataviewjs
+
+```
+
+<!-- DataviewJSToSerialize:
 const domains = dv.current().domains ?? [];
 
 dv.list(domains)
-```
+-->
+<!-- SerializedDataviewJS -->
+
+- Tyranny
+- Indulgence
+
+<!-- SerializedDataviewJS END -->
 
 ## Symbolism
 

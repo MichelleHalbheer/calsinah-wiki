@@ -23,11 +23,14 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:03
 ---
 
 # War of the Arcane
 
 The War of the Arcane was a major, centuries long war between the [[Vibrosyhn Empire]] and the [[Dominion of Riaaroshin]], culminating in the [[Fall of Limihn]].
+%%aat-event-end-of-body%%
 
 ## Causes
 

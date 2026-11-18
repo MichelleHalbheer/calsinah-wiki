@@ -20,6 +20,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Seizing of the Primordial Forge and Battle of Uaynahr
@@ -27,6 +29,7 @@ tags:
 As the [[Congregate of Ancients]] started pursuing their goal of ultimate arcane power more and more ruthlessly, they started eyeing the achievements of the [[Vibrosyhn Empire]] under Iahl rule more and more jealously.
 
 So, eventually, the seized the [[Primordial Forge]], one of the core achievements of research under Iahl. This lead to the [[Battle of Uaynahr]] and triggered the [[War of the Arcane]].
+%%aat-event-end-of-body%%
 
 ## Cause
 

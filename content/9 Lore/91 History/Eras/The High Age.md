@@ -14,6 +14,8 @@ related_organizations: []
 tags:
   - history
   - era
+date-created: 2026-11-16T14:44
+date-updated: 2026-11-17T19:02
 ---
 
 # The High Age
@@ -23,6 +25,7 @@ After the victory of the new deities over the [[Primordials]] and the reshaping 
 And so, in the High Age the two dominant races were the [[Elves]] and the [[Dwarfs]], with the elves taking over the land and the dwarfs building their kingdoms in the mountains. The two races coexisted well, with a lot of trade happening between them. Other races existed in the fringes of the shining socities that the two races built during this time.
 
 But not all gods were happy with the world order that was established. The life born from the essences of some of the deities were destroyed during the first sundering, while other essences could not establish themselves beside the dominant ones. Thus, some of the deities tried to carve out more space for their own children, eventually leading to [[The Second Sundering]].
+%%aat-event-end-of-body%%
 
 ## Characteristics
 

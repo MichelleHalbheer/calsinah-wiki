@@ -14,6 +14,8 @@ related_organizations: []
 tags:
   - history
   - era
+date-created: 2026-11-16T14:46
+date-updated: 2026-11-17T19:02
 ---
 
 # The Second Sundering
@@ -23,6 +25,7 @@ As some of the new deities could not establish the life born from their essences
 Eventually, the deities who did not join the Circle of Relieve, known as the gods of the High Pantheon, intervened, leading to a war between the gods. The war dragged on for a long time, with the world being shaken and reshaped by the sheer power set free in the clashes of the gods.
 
 Eventually, in one last, cataclysmic clash of the gods, the world was torn apart, creating a twisted domain of shadow that would become the dominion of the Circle of Relieve's creatures. That realm became known as the [[Shadowfell]].
+%%aat-event-end-of-body%%
 
 ## Characteristics
 

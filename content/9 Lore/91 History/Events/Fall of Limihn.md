@@ -19,11 +19,14 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Fall of Limihn
 
 Following the ritual casting of [[The Moonstrike]] by the [[Congregate of Ancients]] and the ensuing destruction [[Hariosylth]], Limihn, the first moon of Clasinah, lost its essence and began to fall. The Fall of Limihn therefore marks the most cataclysmic event in the modern history of Calsinah, wiping out most major kingdoms from before the fall and forcing civilization mostly underground for years to follow.
+%%aat-event-end-of-body%%
 
 ## Causes
 

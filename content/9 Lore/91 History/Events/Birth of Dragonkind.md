@@ -17,6 +17,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Birth of Dragonkind
@@ -24,6 +26,7 @@ tags:
 From the first deities of Calsinah spawned the first sentient life. In their own image they created dragonkind. [[Tiamat]] formed the [[Chromatic Dragons]], who follow her goals, while [[Bahamut]] created the [[Metallic Dragons]] in his likeness.
 
 Despite always opposing each other and persisting conflict, for many millennia, dragonkind would life in relativ peace and share Calsinah with each other and their forefathers of the elements.
+%%aat-event-end-of-body%%
 
 ## Causes
 

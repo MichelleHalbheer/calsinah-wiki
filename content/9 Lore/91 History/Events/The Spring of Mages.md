@@ -18,6 +18,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:03
 ---
 
 # The Spring of Mages
@@ -25,6 +27,7 @@ tags:
 Following the total ban of magic by the [[Vibrosyhn Martial Court]] and the brutal persecution of mages in the [[Vibrosyhn Empire]], numerous mages fled and went into hiding.
 
 [[Iahl]], who had newly ascended to godhood, was called upon by his followers to aid them. Seeing the pain caused by the [[Vibrosyhn Martial Court]] and the stop it put to progress, Iahl killed the members of the Martial Court and with a group of Archmages in hiding established himself as god king of the Vibrosyhn Empire, ushering in an age of progress and wealth.
+%%aat-event-end-of-body%%
 
 ## Causes
 

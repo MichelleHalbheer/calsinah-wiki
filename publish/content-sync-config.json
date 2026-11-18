@@ -8,6 +8,7 @@
     ".jpeg",
     ".webp",
     ".gif",
+    ".bmp",
     ".svg",
     ".pdf",
     ".mp3",
@@ -16,5 +17,21 @@
     ".mp4",
     ".webm"
   ],
-  "root_folders": ["0 Wiki"]
+  "root_folders": ["0 Wiki"],
+  "render_api_url": "http://127.0.0.1:27123/render",
+  "rendered_blocks": {
+    "dataview": {
+      "plugin": "dataview",
+      "cache": false
+    },
+    "dataviewjs": {
+      "plugin": "dataview",
+      "cache": false
+    },
+    "aat-vertical": {
+      "plugin": "aprils-automatic-timelines",
+      "cache": false
+    }
+  },
+  "render-cache-dir": "publish/.render-cache"
 }

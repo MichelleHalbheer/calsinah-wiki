@@ -17,6 +17,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:03
 ---
 
 # The Extinguishment
@@ -26,6 +28,7 @@ The [[Vibrosyhn Martial Court]] outlawed the use of magic for any use other than
 In 597 BFL the use of magic was banned completely and all mages were to be executed. Already, many of the more resourceful casters had gone into hiding, with more following after the ban.
 
 This policy would eventually lead to an uprising led by a group of exiled archmages, who had called upon [[Iahl]] to aid them, resulting in Iahl taking the Vibrosyhn throne as god king.
+%%aat-event-end-of-body%%
 
 ## Causes
 

@@ -18,11 +18,14 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Arcane Revolution of Aashin
 
 The Arcane Revolution of Aashin followed the year long mistreatment of mages in the [[Aashin Sovereignty]]. In the process the Aashin royal family was executed and the [[Triumvirate of Lysoov]] was established as the new governing body. The Aashin Sovereignty was renamed to the [[Dominion of Riaaroshin]] and was ruled as a magocracy following the revolution.
+%%aat-event-end-of-body%%
 
 ## Causes
 

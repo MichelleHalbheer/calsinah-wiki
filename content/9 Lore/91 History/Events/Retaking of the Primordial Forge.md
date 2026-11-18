@@ -18,6 +18,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Retaking of the Primordial Forge
@@ -25,6 +27,7 @@ tags:
 After the [[Siege of Quadiin]], the Riaaroshin forces were left severly weakened by the battle and a large movement of troops was necessary to eventually break the siege. This allowed for the [[Vibrosyhn Empire]] to finally retake the [[Primordial Forge]], taking away the one edge the Riaaroshin had left in the war.
 
 This loss eventually led the [[Congregate of Ancients]] to casting [[The Moonstrike]] in hopes of retaking the war.
+%%aat-event-end-of-body%%
 
 ## Causes
 

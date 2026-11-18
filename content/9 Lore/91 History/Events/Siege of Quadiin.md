@@ -18,6 +18,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:03
 ---
 
 # Siege of Quadiin
@@ -25,6 +27,7 @@ tags:
 The [[Siege of Quadiin]] was on of the major engagements in the [[War of the Arcane]]. Following a steady advance by the [[Vibrosyhn Empire]] on Riaaroshin positions, they eventually reached [[Quadiin]], one of the most important cities in the [[Dominion of Riaaroshin]].
 
 After a prolonged siege, Riaaroshin forces eventually managed to break the siege and free the city but at great cost, leaving them severely weakened.
+%%aat-event-end-of-body%%
 
 ## Causes
 

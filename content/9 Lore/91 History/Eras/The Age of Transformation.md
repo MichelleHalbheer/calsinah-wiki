@@ -14,6 +14,8 @@ related_organizations: []
 tags:
   - history
   - era
+date-created: 2026-11-16T14:46
+date-updated: 2026-11-17T19:02
 ---
 
 # The Age of Transformation
@@ -23,6 +25,7 @@ Following the redrawing of the world order caused by the devastating clashes of 
 Empires that more effectively utilized their arcane capabilities - which oftentimes meant more ruthlessly exploiting their mages - quickly grew to large, continent spanning sizes the likes of which had not previously been seen.
 
 As time went on in many areas of the world, mages started rising up against their oppressors, freeing themselves and often establishing themselves as the ruling classes. Following such uprisings they would often continue improving arcane power and knowledge even more than their non-gifted predecessors, leading to mages of enormous power, with some few even transcending mortal limitations.
+%%aat-event-end-of-body%%
 
 ## Characteristics
 

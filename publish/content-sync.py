@@ -5,11 +5,12 @@ import yaml
 import shutil
 import argparse
 import subprocess
-import sys
 import tempfile
+import hashlib
 
 from pathlib import Path
 from tqdm import tqdm
+import requests
 
 
 # --------------------------------------------------
@@ -156,6 +157,230 @@ def validate_content(directory, blocked_phrases):
 
 
 # --------------------------------------------------
+# Render fenced code blocks
+# --------------------------------------------------
+
+def block_hash(block: str) -> str:
+    return hashlib.sha256(
+        block.encode("utf-8")
+    ).hexdigest()
+
+def render_via_api(
+        payload: dict,
+        api_url: str
+    ) -> str:
+
+    response = requests.post(
+        api_url,
+        json=payload,
+        timeout=120
+    )
+
+    response.raise_for_status()
+
+    html = json.loads(response.text)["html"]
+
+    return html
+
+def render_block_cached(
+        block: str,
+        block_type: str,
+        api_url: str,
+        cache: bool,
+        cache_dir: Path,
+        note_path: Path
+    ) -> str:
+
+    if cache:
+        digest = block_hash(note_path.resolve().as_posix() + block)
+
+        cache_file = cache_dir.joinpath(f"{digest}.html")
+
+        if cache_file.exists():
+            return cache_file.read_text(
+                encoding="utf-8"
+            )
+
+    if block_type == "dataviewjs":
+        payload = {
+            "query": block,
+            "format": "html"
+        }
+    elif block_type == "dataview":
+        payload = {
+            "code": block,
+            "format": "html"
+        }
+    else:
+        payload = {
+                "content": block,
+                "format": "html"
+            }
+
+    rendered_html = render_via_api(
+        payload,
+        api_url
+    )
+
+    if cache:
+        cache_file.write_text(
+            rendered_html,
+            encoding="utf-8"
+        )
+
+    return rendered_html
+
+def build_render_regex(
+        block_types: list[str]
+    ) -> re.Pattern:
+
+    escaped = [
+        re.escape(x)
+        for x in block_types
+    ]
+
+    block_pattern = "|".join(escaped)
+
+    return re.compile(
+        rf"```({block_pattern})[^\n]*\n(.*?)\n```",
+        re.DOTALL
+    )
+
+def copy_stylesheet(source: Path):
+    if not source.exists():
+        raise FileNotFoundError(
+            f"Stylesheet not found: {source}"
+        )
+
+    content = source.read_text(encoding="utf-8")
+
+    return content
+
+def include_stylesheets(
+        used_plugins: set[str],
+        vault_path: Path = None,
+        repo_root: Path = None
+    ) -> str:
+
+    for plugin in used_plugins:
+        plugin_path = vault_path.joinpath(".obsidian", "plugins", plugin)
+        css_path = plugin_path.joinpath("styles.css")
+
+        quartz_styles_path = repo_root.joinpath("quartz", "styles")
+        obsidian_plugins_scss = quartz_styles_path.joinpath(f"obsidian-styles.scss")
+
+        if not obsidian_plugins_scss.exists():
+            obsidian_plugins_scss.touch()
+            obsidian_plugins_scss.write_text(
+                f'@use "sass:map";',
+                encoding="utf-8"
+            )
+
+        if css_path.exists():
+            content = copy_stylesheet(css_path)
+
+            obsidian_plugin_content = obsidian_plugins_scss.read_text(encoding="utf-8")
+
+            obsidian_plugins_scss.write_text(
+                obsidian_plugin_content + "\n\n"
+                +f"/* ===== {plugin} ===== */\n\n" + content,
+                encoding="utf-8"
+            )
+
+        custom_scss = quartz_styles_path.joinpath("custom.scss")
+
+        if custom_scss.exists():
+            custom_scss_content = custom_scss.read_text(encoding="utf-8")
+
+            import_line = f'@use "./obsidian-styles.scss" as *;'
+
+            if import_line not in custom_scss_content:
+                custom_scss.write_text(
+                    import_line + "\n" + custom_scss_content.rstrip(),
+                    encoding="utf-8"
+                )
+
+def render_dynamic_blocks(
+        text: str,
+        config: dict,
+        repo_root: Path,
+        note_path: Path = None
+    ) -> str:
+
+    regex = build_render_regex(
+        list(config["rendered_blocks"].keys())
+    )
+
+    api_url = config["render_api_url"]
+
+    parts = []
+
+    last_end = 0
+
+    used_plugins = set()
+
+    for match in regex.finditer(text):
+
+        start, end = match.span()
+
+        parts.append(
+            text[last_end:start]
+        )
+
+        original_block = match.group(0)
+
+        block_type = match.group(1).strip()
+
+        block_info = config["rendered_blocks"].get(block_type)
+        used_plugin = {block_info.get("plugin")}
+        used_plugins.update(used_plugin)
+        cache = block_info.get("cache", False)
+
+        cache_dir = repo_root.joinpath(config["render-cache-dir"])
+
+        if not cache_dir.exists():
+            cache_dir.mkdir(parents=True, exist_ok=True)
+
+        try:
+            rendered_html = render_block_cached(
+                original_block,
+                block_type,
+                api_url,
+                cache=cache,
+                cache_dir=cache_dir,
+                note_path=note_path
+            )
+
+            replacement = (
+                "<!-- ORIGINAL BLOCK\n"
+                + original_block
+                + "\n-->\n\n"
+                + rendered_html
+            )
+
+            parts.append(
+                replacement
+            )
+
+        except Exception as e:
+
+            print(
+                f"Failed rendering block: {e}"
+            )
+
+            parts.append(
+                original_block
+            )
+
+        last_end = end
+
+    parts.append(
+        text[last_end:]
+    )
+
+    return "".join(parts), used_plugins
+
+# --------------------------------------------------
 # Processing Attachments
 # --------------------------------------------------
 
@@ -177,20 +402,16 @@ def find_attachments(text: str, config: dict) -> set[str]:
 
     return attachments
 
-def resolve_attachment(note_path, attachment_name):
-    note_dir = note_path.parent
+def resolve_attachment(note_path, attachment_name, vault):
+    matches = list(
+        vault.rglob(attachment_name)
+    )
 
-    candidates = [
-        note_dir.joinpath(attachment_name),
-        note_dir.joinpath("Attachments", attachment_name),
-    ]
-
-    matches = [p for p in candidates if p.exists()]
+    if matches:
+        return matches[0]
 
     if not matches:
-        raise FileNotFoundError(
-            f"Attachment not found: {attachment_name}\nReferenced in note: {note_path}"
-        )
+        return None
 
     if len(matches) > 1:
         raise ValueError(
@@ -204,12 +425,13 @@ def resolve_attachment(note_path, attachment_name):
 # Sync content
 # --------------------------------------------------
 
-def sync_content(vault, staging, include_folders, config):
+def sync_content(vault, repo_root,staging, include_folders, config):
     copied = 0
     excluded = 0
     redacted_total = 0
     seen_files = set()
     referenced_attachments = []
+    used_plugins = set()
 
     print("\nReading Obsidian vault...")
 
@@ -233,8 +455,13 @@ def sync_content(vault, staging, include_folders, config):
                 continue
 
             filtered, redacted = redact_dm_sections(text, file)
-            relative = file.relative_to(vault)
 
+            filtered, note_used_plugins = render_dynamic_blocks(filtered, config, repo_root, note_path=file)
+
+            if note_used_plugins:
+                used_plugins.update(note_used_plugins)
+
+            relative = file.relative_to(vault)
             target_relative = relative
 
             root_folders = config.get("root_folders", [])
@@ -253,7 +480,8 @@ def sync_content(vault, staging, include_folders, config):
             seen_files.add(target_relative)
 
             attachments = find_attachments(filtered, config)
-            resolved_attachments = [resolve_attachment(file, att) for att in attachments]
+            resolved_attachments = [resolve_attachment(file, att, vault) for att in attachments]
+            resolved_attachments = [att for att in resolved_attachments if att is not None]
             referenced_attachments.extend(resolved_attachments)
 
             target = staging.joinpath(target_relative)
@@ -262,6 +490,8 @@ def sync_content(vault, staging, include_folders, config):
 
             copied += 1
             redacted_total += redacted
+
+    include_stylesheets(used_plugins, vault, repo_root)
 
     deduplicated_attachments = set(referenced_attachments)
 
@@ -378,6 +608,7 @@ def main():
 
         copied, excluded, redacted, num_attachments = sync_content(
             vault,
+            repo_root,
             staging,
             include_folders,
             config

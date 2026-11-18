@@ -19,6 +19,8 @@ tags:
   - history
   - event
   - world-anvil-import
+date-created: 2026-11-16T12:09
+date-updated: 2026-11-17T19:02
 ---
 
 # Founding of the College of Ascendancy
@@ -26,6 +28,7 @@ tags:
 Among the [[Triumvirate of Lysoov]]'s primary goals was the study and improvement of the arcane arts. As such, the second generation of the Triumvirate established the [[College of Ascendancy]] in [[Jiimar]]. It was established with twelve faculties, specializing in different aspects of the arcane, though they were distinct from the schools of magic as they are known today.
 
 The college was the most prestigious institution in the [[Dominion of Riaaroshin]] and developed tremendous political influence over the time if it's existence.
+%%aat-event-end-of-body%%
 
 ## Causes
 
