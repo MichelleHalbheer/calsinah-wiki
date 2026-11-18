@@ -6,7 +6,7 @@ tags:
   - index
 ---
 
-This site collects the campaign notes for **Heroes of Calsinah**, a Dungeons & Dragons campaign set in the world of Calsinah.
+This site collects the campaign notes for **Heroes of Calsinah**, a Dungeons &amp; Dragons campaign set in the world of Calsinah.
 
 Notes appear here once they are ready to be shared. Over time you'll find:
 
@@ -18,5 +18,5 @@ Notes appear here once they are ready to be shared. Over time you'll find:
 
 Use the explorer to browse by section, or search for a name.
 
-> [!warning] Spoilers
-> These notes cover an ongoing campaign and may reveal events players have not yet reached.
+&gt; [!warning] Spoilers
+&gt; These notes cover an ongoing campaign and may reveal events players have not yet reached.

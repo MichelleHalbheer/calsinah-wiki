@@ -1,6 +1,7 @@
 
 import re
 import json
+from bs4 import BeautifulSoup
 import yaml
 import shutil
 import argparse
@@ -203,12 +204,12 @@ def render_block_cached(
 
     if block_type == "dataviewjs":
         payload = {
-            "query": block,
+            "code": block.removeprefix("```dataviewjs\n").removesuffix("\n```"),
             "format": "html"
         }
     elif block_type == "dataview":
         payload = {
-            "code": block,
+            "query": block.removeprefix("```dataview\n").removesuffix("\n```"),
             "format": "html"
         }
     else:
@@ -242,7 +243,7 @@ def build_render_regex(
     block_pattern = "|".join(escaped)
 
     return re.compile(
-        rf"```({block_pattern})[^\n]*\n(.*?)\n```",
+        rf"```({block_pattern})\b[^\n]*\n(.*?)\n```",
         re.DOTALL
     )
 
@@ -283,7 +284,7 @@ def include_stylesheets(
 
             obsidian_plugins_scss.write_text(
                 obsidian_plugin_content + "\n\n"
-                +f"/* ===== {plugin} ===== */\n\n" + content,
+                +f"/* ===== {plugin}  */\n\n" + content,
                 encoding="utf-8"
             )
 
@@ -299,6 +300,19 @@ def include_stylesheets(
                     import_line + "\n" + custom_scss_content.rstrip(),
                     encoding="utf-8"
                 )
+
+def strip_links_inside_cards(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    for card in soup.select("a.aat-card"):
+        for inner_link in card.select("a"):
+            if inner_link is card:
+                continue
+
+            inner_link.unwrap()
+
+    return str(soup)
+
 
 def render_dynamic_blocks(
         text: str,
@@ -378,7 +392,10 @@ def render_dynamic_blocks(
         text[last_end:]
     )
 
-    return "".join(parts), used_plugins
+    html = "".join(parts)
+    html = strip_links_inside_cards(html)
+
+    return html, used_plugins
 
 # --------------------------------------------------
 # Processing Attachments

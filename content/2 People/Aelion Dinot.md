@@ -27,7 +27,7 @@ tags:
 
 - Verbleib nach seiner Pensionierung im Tempel und ist beliebt bei den höheren Rängen der Klerik. Er disktuiert sehr gerne mit Noviz*innen über die theologischen Einzelheiten und ist daher bei den meisten Noviz*innen sehr unbeliebt.
 
-### Voice & Roleplaying Notes
+### Voice &amp; Roleplaying Notes
 
 - Accent:
 - Speech Pattern:

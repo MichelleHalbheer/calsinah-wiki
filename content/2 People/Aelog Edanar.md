@@ -25,7 +25,7 @@ date-updated: 2026-11-17T10:40
 
 ## Personality
 
-### Voice & Roleplaying Notes
+### Voice &amp; Roleplaying Notes
 
 - Accent:
 - Speech Pattern: Rough, deep

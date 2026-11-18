@@ -25,7 +25,7 @@ Describe physical appearance, clothing, posture, voice and notable features.
 
 Describe mannerisms, goals, fears, ideals and quirks.
 
-### Voice & Roleplaying Notes
+### Voice &amp; Roleplaying Notes
 
 - Accent:
 - Speech Pattern:

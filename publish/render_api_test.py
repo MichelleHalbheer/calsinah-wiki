@@ -1,37 +1,20 @@
 import json
+from pathlib import Path
+from bs4 import BeautifulSoup
 
 import requests
 
 RENDER_API_URL = "http://127.0.0.1:27123/render"
 
 TIMELINE = r"""
----
-publish: true
-type: history
-related_events: []
-related_eras: []
-tags:
-  - history
-date-created: 2026-11-16T14:54
-date-updated: 2026-11-18T11:45
----
-# A Brief History of Calsinah
-## Overview
-
-
 ```aat-vertical
 History of Calsinah
 dateDisplayFormat: {year}
 ```
-## Origins
-## Development
-## Major Turning Points
-## Legacy
-## Related Events
-## Notes
 """
 
 payload = {
+    #"filePath": Path(r"C:\Users\MichelleHalbheer\Documents\Calsinah DM\9 Lore\91 History\A Brief History of Calsinah.md").as_posix(),
     "content": TIMELINE,
     "format": "html"
 }
@@ -45,6 +28,21 @@ response = requests.post(
 response.raise_for_status()
 
 html = json.loads(response.text)["html"]
+
+
+def strip_links_inside_cards(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    for card in soup.select("a.aat-card"):
+        for inner_link in card.select("a"):
+            if inner_link is card:
+                continue
+
+            inner_link.unwrap()
+
+    return str(soup)
+
+html = strip_links_inside_cards(html)
 
 print(html[:5000])
 
