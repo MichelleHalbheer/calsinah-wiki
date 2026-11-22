@@ -14,12 +14,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:52
+date-updated: 2026-11-22T15:44
 ---
 
-# Corellon
+![Corellon](https://static.wikia.nocookie.net/forgottenrealms/images/3/3b/Corellon_vs_Gruumsh.jpg/revision/latest?cb=20230729011704)
 
-![[20250905_1227_Corellon's Enchanted Twilight_simple_compose_01k4cpj170e75rn40ch3n6vge8.jpg]]
+# Corellon
 
 Corellon, or fully Corellon Larethian, is the god of magic and the arts. He is the patron god of the elves. He blesses those who aid others, while being angry at those who defile the dead. His realm is known as [[Arvandor]].
 

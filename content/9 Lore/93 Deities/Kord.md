@@ -14,12 +14,10 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:53
+date-updated: 2026-11-22T15:36
 ---
 
 # Kord
-
-![[20250905_1752_Kord's Electrifying Battle_simple_compose_01k4d96571fa3tcv31pa63yxcz.jpg]]
 
 Kord is the god of strength and storms. He reveres the strength of body and is knwon to endorse training oneself to the supreme level possible. His worshippers often train meticulously and run brawling rings, where one can test their strength in a strict setting.
 

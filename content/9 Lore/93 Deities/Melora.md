@@ -17,12 +17,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:53
+date-updated: 2026-11-22T15:47
 ---
 
-# Melora
+![Melora](https://static.wikitide.net/criticalrolewiki/thumb/b/bf/Wildmother.jpg/580px-Wildmother.jpg)
 
-![[20250905_2212_Tamed Red Locks_remix_01k4dr0jp0ezebkak80qsmracf.jpg]]
+# Melora
 
 Melora is the keeper of the wilderness, and represents the wild creatures of nature, natural beauty and fresh water. Meloras druids and the clerics of her lover [[Tyrael]] work together to ensure balance between nature and civilization. If that balance is upset, the pair grows furious, with their fury manifesting as natural disasters. Melora is often worshipped through carvings and depictions in groves or other wild places, but occasionally also blesses the construction of a temple in a population center, often in ones where the inhabitants live in unison with natures.
 

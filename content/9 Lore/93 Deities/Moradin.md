@@ -15,12 +15,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:53
+date-updated: 2026-11-22T15:49
 ---
 
-# Moradin
+![Moradin](https://static.wikia.nocookie.net/forgottenrealms/images/2/2c/Moradin2e.png/revision/latest?cb=20231127120851)
 
-![[20250906_1611_Glowing Forge Workpiece_remix_01k4fnrgqke7e8hf728dmm7pkt.jpg]]
+# Moradin
 
 Moradin is the patron god of the dwarves and the chief deity of the dwarven pantheon. Moradin is viewed as strength incarnate and force of will embodied. He defends his creations, the [[Dwarves]], fiercely and judges them by their work first and their intentions second. He is a large inspiration for dwarven inventions and constantly seeks to improve their race. He also encourages a good-natured, intelligent and harmonious coexistence with other good races, while constantly battling the pride and isolationist tendencies of the dwarves.
 

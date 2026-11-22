@@ -15,12 +15,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:52
+date-updated: 2026-11-22T15:44
 ---
 
-# Erathis
+![Erathis](https://static.wikia.nocookie.net/dnd-campaign/images/c/c9/Erathis.jpg/revision/latest?cb=20171110161632)
 
-![[20250905_1735_Divine Law in Marble_simple_compose_01k4d86qygfntb07fq4scxcnp5.jpg]]
+# Erathis
 
 Erathis is the goddess of civilisation, inventions and the law. She is primarily worshipped by rulers, judges and pioneers. She has temples in most major cities.
 

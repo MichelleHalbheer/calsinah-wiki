@@ -15,14 +15,13 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:52
+date-updated: 2026-11-22T15:33
 ---
 
 # Iahl
 
-![[20250905_1031_Elven God of Progress_simple_compose_01k4cfx5kjeshsx37rk0j6s37q.jpg]]
+### Birth and Ascension
 
-Birth and Ascension
 Iahl Lightfield was an elf in the [[The Age of Transformation]] in 729 BFL. Even in his early life, he discovered his innate magical abilities, which were soon found to be of tremendous power. He became an astute student of the arcane arts, always keeping a focus on the good he could do with his gifts, living a life of learning, progress and benevolence. Eventually, Iahl transcended the bounds of a mere mortal and ascended to godhood. With this, he became the god of progress and benevolence, claiming the domains of arcana and knowledge. Despite his ascension, Iahl continued living among mortals in the physical body he was born with for many years.
 
 ### Involvement in Vibrosyhn

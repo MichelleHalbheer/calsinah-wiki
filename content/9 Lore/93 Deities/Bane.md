@@ -16,12 +16,13 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T17:39
+date-updated: 2026-11-22T15:44
 ---
+
+![Bane](https://static.wikia.nocookie.net/forgottenrealms/images/8/84/Bane.JPG/revision/latest?cb=20210506132241)
 
 # Bane
 
-![latest (400×590)](https://static.wikia.nocookie.net/forgottenrealms/images/8/84/Bane.JPG/revision/latest?cb=20210506132241)
 Bane is the god of tyrannical oppression, terror and hate. He is the face of evil itself. His plane is known as the Banehold, and as many of the other deities of the [[Circle of Relieve]] Bane wishes to achieve total domination of Calsinah. He is, however, a relatively minor deity compared to many of his kin.
 
 ### Titles

@@ -14,12 +14,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T16:42
+date-updated: 2026-11-22T15:45
 ---
 
-# Asmodeus
-
 ![Asmodeus](https://static.wikia.nocookie.net/forgottenrealms/images/4/42/Asmodeus_AFR.jpg)
+
+# Asmodeus
 
 Asmodeus, or **Asmodel** in Infernal is the god of tyranny and indulgence. He is the ruler of all demonkind and Lord of the Ninth. He rules his realm, Nessus with a tyrannical first and tries to become supreme ruler of all the nine hells and all of Calsinah. He was the prime driver behind the secession of the [[Circle of Relieve]] from the Calsinian Pantheon and high general of the dark forces during [[The Second Sundering]].
 

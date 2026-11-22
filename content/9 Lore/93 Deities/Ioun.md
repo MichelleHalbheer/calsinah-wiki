@@ -15,12 +15,12 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:52
+date-updated: 2026-11-22T15:40
 ---
 
-# Ioun
+![Ioun_battles_Tharizdun_-_Exandria_Intimate_History.png](https://static.wikitide.net/criticalrolewiki/2/21/Ioun_battles_Tharizdun_-_Exandria_Intimate_History.png)
 
-![[20250905_1742_Ioun's Radiant Wisdom_simple_compose_01k4d8kdf8fh4tanjsn1861hm4.jpg]]
+# Ioun
 
 Ioun is the goddess of knowledge, skill, and prophecy. Sages, seers and tacticians, as well as all who live by their knowledge and mind, often worship her. While [[Corellon]] is the patron of the arcane arts, Ioun is the patron of its study. Libraries and wizard schools are often built in her name or dedicated to her.
 
