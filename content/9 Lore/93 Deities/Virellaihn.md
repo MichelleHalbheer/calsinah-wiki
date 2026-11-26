@@ -18,12 +18,10 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T10:54
+date-updated: 2026-11-22T17:53
 ---
 
 # Virellaihn
-
-![[ChatGPT Image Sep 5, 2025, 09_43_29 AM.jpg]]
 
 Virellaihn is a tripartite deity of the moon, power and the tides, with his three aspects each representing one of the three moons of Calsinah.
 

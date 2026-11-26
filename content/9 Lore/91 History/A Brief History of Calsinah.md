@@ -6,70 +6,259 @@ related_eras: []
 tags:
   - history
 date-created: 2026-11-16T14:54
-date-updated: 2026-11-22T17:47
+date-updated: 2026-11-26T13:52
 ---
 
 # A Brief History of Calsinah
 
-## Overview
+A brief history of [[Calsinah]] as recorded by [[Ara'ash Om'rehn]] in their book [[On Times and Lifes Past]]
 
-<!-- ORIGINAL BLOCK
-```aat-vertical
-History of Calsinah
-dateDisplayFormat: {year}
-```
+<!-- DataviewJSToSerialize:
+const TIMELINE = "History of Calsinah";
+
+function parseFcDate(fcDate) {
+    if (!fcDate) return null;
+    const m = String(fcDate).match(/^(-?\d+)-(\d+)-(\d+)$/);
+    if (!m) return null;
+   
+    return {
+        year: Number(m[1]),
+        month: Number(m[2]),
+        day: Number(m[3])
+    };
+}
+
+function compareFcDates(a, b) {
+    const da = parseFcDate(a);
+    const db = parseFcDate(b);
+   
+    if (!da || !db) return 0;
+
+    if (da.year !== db.year) return da.year - db.year;
+
+    if (da.month !== db.month) return da.month - db.month;
+
+    return da.day - db.day;
+}
+
+function inEra(eventDate, eraStart, eraEnd) {
+    return (
+        compareFcDates(eventDate, eraStart) >= 0 &&
+        compareFcDates(eventDate, eraEnd) <= 0
+    );
+
+}
+
+async function getEventBody(page) {
+    const file = app.vault.getAbstractFileByPath(page.file.path);
+    let text = await app.vault.cachedRead(file);
+
+    // Remove frontmatter
+	text = text.replace(/^---\n[\s\S]*?\n---\n*/, "");
+
+	// Remove leading H1
+	text = text.replace(/^# .*?\n+/m, "");
+   
+    const marker = "%%aat-event-end-of-body%%";
+    const idx = text.indexOf(marker);
+
+    if (idx >= 0)
+        text = text.substring(0, idx);
+
+    return text
+		// [[Target#Heading|Display]] → Display
+	    .replace(/\[\[[^|\]]+\|([^\]]+)\]\]/g, "$1")
+	    // [[Target#Heading]] → Target
+	    .replace(/\[\[([^#|\]]+)(?:#[^\]]*)?\]\]/g, "$1")
+	    .replace(/\n+/g, " ")
+	    .replace(/\|/g, "\\|")
+	    .replace(/:/g, " -")
+	    .trim();;
+}
+
+const eras = dv.pages()
+		    .where(p =>
+		        p.type == "historical_era" &&
+		        p["aat-render-enabled"] === true &&
+		        p["aat-timelines"] &&
+		        p["aat-timelines"].includes(TIMELINE)
+		    )
+		    .array()
+		    .sort((a, b) =>
+			    compareFcDates(a["fc-date"], b["fc-date"])
+		    );
+
+const events = dv.pages()
+			    .where(p =>
+			        p.type == "historical_event" &&
+			        p["aat-render-enabled"] === true &&
+			        p["aat-timelines"] &&
+			        p["aat-timelines"].includes(TIMELINE)
+			    );
+
+let mermaid = "timeline TD\n";
+
+for (const era of eras) {
+	const eraStart = parseFcDate(era["fc-date"]);
+	const eraEnd = parseFcDate(era["fc-end"]);
+
+	let eraStartString;
+	let eraEndString;
+
+	if (eraStart != null) {
+		const eraStartYear = eraStart.year;
+		if (eraStartYear >= 0) {
+			eraStartString = `${eraStartYear} AFL`;
+		} else {
+			eraStartString = `${Math.abs(eraStartYear)} BFL`;
+		}
+	} else {
+		eraStartString = "The Beginning of Time";
+	}
+
+	if (eraEnd != null) {
+		const eraEndYear = eraEnd.year;
+		if (eraEndYear >= 0) {
+			eraEndString = `${eraEndYear} AFL`;
+		} else {
+			eraEndString = `${Math.abs(eraEndYear)} BFL`;
+		}
+	} else {
+		eraEndString = "Today"
+	}
+
+    const eraTitle =
+        `${era.file.name} • (${eraStartString} → ${eraEndString})`;
+    mermaid += `    section ${eraTitle}\n`;
+
+    const eraEvents = events
+        .where(e => inEra(
+            e["fc-date"],
+            era["fc-date"],
+            era["fc-end"]
+        ))
+        .array()
+        .sort((a, b) =>
+        compareFcDates(a["fc-date"], b["fc-date"]));
+
+    for (const event of eraEvents) {
+        const body = await getEventBody(event);
+       
+        const eventStart = parseFcDate(event["fc-date"]);
+		const eventEnd = parseFcDate(event["fc-end"]);
+
+		let eventStartString;
+		let eventEndString;
+
+		if (eventStart != null) {
+			const eventStartYear = eventStart.year;
+			if (eventStartYear >= 0) {
+				eventStartString = `${eventStartYear} AFL`;
+			} else {
+				eventStartString = `${Math.abs(eventStartYear)} BFL`;
+			}
+		} else {
+			eventStartString = "The Beginning of Time";
+		}
+
+		if (eventEnd != null) {
+			const eventEndYear = eventEnd.year;
+			if (eventEndYear >= 0) {
+				eventEndString = `${eventEndYear} AFL`;
+			} else {
+				eventEndString = `${Math.abs(eventEndYear)} BFL`;
+			}
+		} else {
+			eventEndString = "Today"
+		}
+        const dateLabel =
+            event["fc-end"] &&
+            event["fc-end"] !== event["fc-date"]
+                ? `${eventStartString} → ${eventEndString}`
+                : `${eventStartString}`;
+
+        const title =
+            `${event.file.name} • (${dateLabel})`;
+        mermaid += `        ${title} : ${body}\n`;
+    }
+    mermaid += "\n";
+}
+
+dv.paragraph(
+`~~~mermaid
+
+${mermaid}
+
+~~~`
+);
+
+function extractNoteName(label) {
+    return label.split("•")[0].trim();
+}
+
+// Era headers
+document.querySelectorAll("g.pele-section").forEach(section => {
+    const note = extractNoteName(section.dataset.id ?? "");
+    if (!note) return;
+    section.style.cursor = "pointer";
+    section.addEventListener("click", () => {
+        app.workspace.openLinkText(note, "", false);
+    });
+});
+
+// Event boxes AND event text
+document.querySelectorAll("g.pele-period").forEach(period => {
+    const note = extractNoteName(period.dataset.id ?? "");
+    if (!note) return;
+    period.style.cursor = "pointer";
+    period.addEventListener("click", e => {
+        e.stopPropagation();
+        app.workspace.openLinkText(note, "", false);
+    });
+});
 -->
-<div class="block-language-aat-vertical aat-root-container"><div class="aat-vertical-timeline"><div class="aat-card-list-root"><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The Compounding.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Compounding</h2><h4 class="aat-card-start-date">From 200000 BFL to 90001 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Compounding<br/>
-At the beginning, there was nothing but elemental chaos. The Material Plane was a place populated by only a few worlds and fewer species. But as Eluan, She Who Wanders, passed through the Material Plane, she found the place lacking interesting features for one such as her. But she had previously seen the different elemental planes and knew that with their power, she could create worlds. So she drew forth raw power from each of the elemental planes - Fire, WaterWater, Earth, Air, Ice, Ash, Magma and Ooze - and created a world to her liking, which would later become known as Calsinah. To supply the world with the power needed to sustain it, she formed one being made of the pure elemental force, the Primordials. Calsinah was a place of pure elemental force, but Eluan had formed Calsinah before wandering on to sate her curiosity.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Eras/The Draconic Ages.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/91 History/Attachments/landmark-solid-full.svg"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Draconic Ages</h2><h4 class="aat-card-start-date">From 90000 BFL to 54001 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Draconic Ages<br/>
-From the raw elemental power that emanated from the Primordials and that sustained the world, twin deities formed. They are known as Bahamut, the Platinum Dragon, known for his nobility and justness, and Tiamat, the Queen of Chaos, known for her greed and vengefulness. In their likeness, they formed the first sentient life on Calsinah, the dragons. Bahamut created a set of metallic dragons, who follow his ideals, while Tiamat formed the chromatic dragons, sharing in her goals. Nevertheless, the dragons shared Calsinah for aeons, with Bahamut's and Tiamat's powers and that of their children keeping each other in check.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/Birth of Bahamut and Tiamat.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/93 Deities/Bahamut.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Birth of Bahamut and Tiamat</h2><h4 class="aat-card-start-date">90000 BFL</h4></header><div class="aat-card-body"><p dir="auto">Birth of Bahamut and Tiamat<br/>
-From the essence of the elements twin deities were born. And though both stemmed from the same essence, they were like two sides of a coin. One was known as Bahamut, the Platinum Dragon, the god of justice and nobility. The other became known as Tiamat, the Queen of Chaos, goddess of wealth, greed and vengeance. The twin gods would forever oppose each other and so would their spawn.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/Birth of Dragonkind.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/93 Deities/Bahamut.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Birth of Dragonkind</h2><h4 class="aat-card-start-date">80000 BFL</h4></header><div class="aat-card-body"><p dir="auto">Birth of Dragonkind<br/>
-From the first deities of Calsinah spawned the first sentient life. In their own image they created dragonkind. Tiamat formed the Chromatic Dragons, who follow her goals, while Bahamut created the Metallic Dragons in his likeness.</p>
-<p dir="auto">Despite always opposing each other and persisting conflict, for many millennia, dragonkind would life in relativ peace and share Calsinah with each other and their forefathers of the elements.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The First Sundering.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The First Sundering</h2><h4 class="aat-card-start-date">From 23000 BFL to 10001 BFL</h4></header><div class="aat-card-body"><p dir="auto">The First Sundering<br/>
-The First Sundering was the war between the Primordials and the new deities over space and dominance on Calsinah, with Bahamut and the metallic dragons taking the side of the new gods, while Tiamat and her chromatic dragons remained on the side of the elementals. The war had many brutal engagements, reshaping the surface of Calsinah itself, forming new land masses.</p>
-<p dir="auto">The war eventually ended when the new deities managed to contain the Primordials within enormous crystals, which remain buried under Calsinah's surface to this day. Despite their containment, enormous elemental power still emanates from the crystals, and the veil between the Material Plane and the elemental planes is especially thin in proximity to the Primordial Shards.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The High Age.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The High Age</h2><h4 class="aat-card-start-date">From 10000 BFL to 5001 BFL</h4></header><div class="aat-card-body"><p dir="auto">The High Age<br/>
-After the victory of the new deities over the Primordials and the reshaping of the world that happened during the war, the lifeforms created by the new deities started to take over Calsinah. With the sheer power that was set free during the war, the veil into the Feywild has also thinned and magic in its raw, unchanneled form seeped through. This also allowed races with a more primeval connection to the raw magic to harness it on Calsinah.</p>
-<p dir="auto">And so, in the High Age the two dominant races were the Elves and the Dwarfs, with the elves taking over the land and the dwarfs building their kingdoms in the mountains. The two races coexisted well, with a lot of trade happening between them. Other races existed in the fringes of the shining socities that the two races built during this time.</p>
-<p dir="auto">But not all gods were happy with the world order that was established. The life born from the essences of some of the deities were destroyed during the first sundering, while other essences could not establish themselves beside the dominant ones. Thus, some of the deities tried to carve out more space for their own children, eventually leading to The Second Sundering.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/The Investiture.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/91 History/Eras/The First Sundering.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Investiture</h2><h4 class="aat-card-start-date">10000 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Investiture<br/>
-When at the end of The First Sundering the veil between planes briefly collapsed, the land got suffused by otherworldly energy, leaving behind powerful ley lines and magically affine creatures such as the Elves, Dwarves and Gnomes got invested by the energy of other realms. In most places the veil was restored by the winning gods quickly, but in some places the veil remains broken or thinned, leaving behind gateway to other planes.<br/>
-Causes<br/>
-Event<br/>
-Consequences<br/>
-Major Participants<br/>
-Related Articles</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The Second Sundering.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Second Sundering</h2><h4 class="aat-card-start-date">From 5000 BFL to 2301 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Second Sundering<br/>
-As some of the new deities could not establish the life born from their essences on Calsinah, they formed The Circle of Relieve, a separate collection of gods, aimed at providing room for their own creations. While some of them only wanted their creations to have room to exist, other deities were aiming for dominance of their life over Calsinah. So they started producing more and more twisted lifeforms by pulling on the energy of their own home planes, which started threatening existing life.</p>
-<p dir="auto">Eventually, the deities who did not join the Circle of Relieve, known as the gods of the High Pantheon, intervened, leading to a war between the gods. The war dragged on for a long time, with the world being shaken and reshaped by the sheer power set free in the clashes of the gods.</p>
-<p dir="auto">Eventually, in one last, cataclysmic clash of the gods, the world was torn apart, creating a twisted domain of shadow that would become the dominion of the Circle of Relieve's creatures. That realm became known as the Shadowfell.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Eras/The Age of Transformation.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/91 History/Eras/The Second Sundering.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Age of Transformation</h2><h4 class="aat-card-start-date">From 2300 BFL to 0 AFL</h4></header><div class="aat-card-body"><p dir="auto">The Age of Transformation<br/>
-Following the redrawing of the world order caused by the devastating clashes of The Second Sundering, an enterprising race known as Humans started harnessing magic to create objects of power and create arcane technologies to further their societies. At the start of the age, they viewed mages mostly as a gift by the gods and the cosmic forces, and thus a commodity to be owned. As such, mages were treated as property and depending on culture either kept as slaves or as serfs. There remain some places where magic is still practiced freely, mostly in areas where the elves and dwarfs remained in power.</p>
-<p dir="auto">Empires that more effectively utilized their arcane capabilities - which oftentimes meant more ruthlessly exploiting their mages - quickly grew to large, continent spanning sizes the likes of which had not previously been seen.</p>
-<p dir="auto">As time went on in many areas of the world, mages started rising up against their oppressors, freeing themselves and often establishing themselves as the ruling classes. Following such uprisings they would often continue improving arcane power and knowledge even more than their non-gifted predecessors, leading to mages of enormous power, with some few even transcending mortal limitations.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Arcane Revolution of Aashin.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Arcane Revolution of Aashin</h2><h4 class="aat-card-start-date">From 764 BFL to 759 BFL</h4></header><div class="aat-card-body"><p dir="auto">Arcane Revolution of Aashin<br/>
-The Arcane Revolution of Aashin followed the year long mistreatment of mages in the Aashin Sovereignty. In the process the Aashin royal family was executed and the Triumvirate of Lysoov was established as the new governing body. The Aashin Sovereignty was renamed to the Dominion of Riaaroshin and was ruled as a magocracy following the revolution.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/Birth of Iahl.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/93 Deities/Iahl.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Birth of Iahl</h2><h4 class="aat-card-start-date">709 BFL</h4></header><div class="aat-card-body"><p dir="auto">Birth of Iahl<br/>
-Iahl was a sorcerer born to tremendous power and talent. He would hone his powers relentlessly, eventuall ascending to godhood and becoming the god king of the Vibrosyhn Empire.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Founding of the College of Ascendancy.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Founding of the College of Ascendancy</h2><h4 class="aat-card-start-date">621 BFL</h4></header><div class="aat-card-body"><p dir="auto">Founding of the College of Ascendancy<br/>
-Among the Triumvirate of Lysoov's primary goals was the study and improvement of the arcane arts. As such, the second generation of the Triumvirate established the College of Ascendancy in Jiimar. It was established with twelve faculties, specializing in different aspects of the arcane, though they were distinct from the schools of magic as they are known today. </p>
-<p dir="auto">The college was the most prestigious institution in the Dominion of Riaaroshin and developed tremendous political influence over the time if it's existence.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/The Extinguishment.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Extinguishment</h2><h4 class="aat-card-start-date">From 602 BFL to 594 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Extinguishment<br/>
-The Vibrosyhn Martial Court outlawed the use of magic for any use other than purposes of state, calling for all mages to register with the government. Any mage presumed to be using the arcane arts outside of approved uses was arrested and executed without trial.</p>
-<p dir="auto">In 597 BFL the use of magic was banned completely and all mages were to be executed. Already, many of the more resourceful casters had gone into hiding, with more following after the ban.</p>
-<p dir="auto">This policy would eventually lead to an uprising led by a group of exiled archmages, who had called upon Iahl to aid them, resulting in Iahl taking the Vibrosyhn throne as god king.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/Ascension of Iahl.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/93 Deities/Iahl.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Ascension of Iahl</h2><h4 class="aat-card-start-date">598 BFL</h4></header><div class="aat-card-body"><p dir="auto">Ascension of Iahl<br/>
-The powerful sorcerer Iahl was known to aid any in need using his powers. Additionally, he was well known for developing unique spells or amenities of the arcane.</p>
-<p dir="auto">In 598 BFL he ascended to godhood, making him the god of progress and benevolence.</p></div></div></a><a class="internal-link aat-card aat-card-has-image" href="9 Lore/91 History/Events/The Spring of Mages.md"><img class="aat-card-image" src="C:/Users/MichelleHalbheer/Documents/Calsinah DM/9 Lore/93 Deities/Iahl.md"/><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Spring of Mages</h2><h4 class="aat-card-start-date">594 BFL</h4></header><div class="aat-card-body"><p dir="auto">The Spring of Mages<br/>
-Following the total ban of magic by the Vibrosyhn Martial Court and the brutal persecution of mages in the Vibrosyhn Empire, numerous mages fled and went into hiding.</p>
-<p dir="auto">Iahl, who had newly ascended to godhood, was called upon by his followers to aid them. Seeing the pain caused by the Vibrosyhn Martial Court and the stop it put to progress, Iahl killed the members of the Martial Court and with a group of Archmages in hiding established himself as god king of the Vibrosyhn Empire, ushering in an age of progress and wealth.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Uprising of Jiimar.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Uprising of Jiimar</h2><h4 class="aat-card-start-date">From 431 BFL to 429 BFL</h4></header><div class="aat-card-body"><p dir="auto">Uprising of Jiimar<br/>
-With the College of Ascendancy growing more and more powerful, the Triumvirate of Lysoov started imposing more and more restrictions on the magic activities of the public and the development of power and the arcane arts at the college.</p>
-<p dir="auto">In 431 BFL the arrest of several students of the College lead to student protests, which quickly escalated. Many faculty members, in particular the twelve heads of faculty - known as the twelve Ancients - supported the students in their protests, which resulted in the Triumvirate of Lysoov being removed from power by the Ancients in 429 BFL.</p>
-<p dir="auto">The result was the establishment of the Congregate of Ancients as the new power of state. While the Triumvirate already aimed to improve the powers they wielded, the Congregate of Ancients had an agenda that pursued this goal far more ruthlessly.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Seizing of the Primordial Forge and Battle of Uaynahr.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Seizing of the Primordial Forge and Battle of Uaynahr</h2><h4 class="aat-card-start-date">339 BFL</h4></header><div class="aat-card-body"><p dir="auto">Seizing of the Primordial Forge and Battle of Uaynahr<br/>
-As the Congregate of Ancients started pursuing their goal of ultimate arcane power more and more ruthlessly, they started eyeing the achievements of the Vibrosyhn Empire under Iahl rule more and more jealously.</p>
-<p dir="auto">So, eventually, the seized the Primordial Forge, one of the core achievements of research under Iahl. This lead to the Battle of Uaynahr and triggered the War of the Arcane.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/War of the Arcane.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">War of the Arcane</h2><h4 class="aat-card-start-date">From 339 BFL to 0 AFL</h4></header><div class="aat-card-body"><p dir="auto">War of the Arcane<br/>
-The War of the Arcane was a major, centuries long war between the Vibrosyhn Empire and the Dominion of Riaaroshin, culminating in the Fall of Limihn.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Siege of Quadiin.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Siege of Quadiin</h2><h4 class="aat-card-start-date">From 38 BFL to 6 BFL</h4></header><div class="aat-card-body"><p dir="auto">Siege of Quadiin<br/>
-The Siege of Quadiin was on of the major engagements in the War of the Arcane. Following a steady advance by the Vibrosyhn Empire on Riaaroshin positions, they eventually reached Quadiin, one of the most important cities in the Dominion of Riaaroshin.</p>
-<p dir="auto">After a prolonged siege, Riaaroshin forces eventually managed to break the siege and free the city but at great cost, leaving them severely weakened.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Retaking of the Primordial Forge.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Retaking of the Primordial Forge</h2><h4 class="aat-card-start-date">From 3 BFL to 3 BFL</h4></header><div class="aat-card-body"><p dir="auto">Retaking of the Primordial Forge<br/>
-After the Siege of Quadiin, the Riaaroshin forces were left severly weakened by the battle and a large movement of troops was necessary to eventually break the siege. This allowed for the Vibrosyhn Empire to finally retake the Primordial Forge, taking away the one edge the Riaaroshin had left in the war.</p>
-<p dir="auto">This loss eventually led the Congregate of Ancients to casting The Moonstrike in hopes of retaking the war.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/The Moonstrike.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Moonstrike</h2><h4 class="aat-card-start-date">0 AFL</h4></header><div class="aat-card-body"><p dir="auto">The Moonstrike<br/>
-The Moonstrike marked the culmination of the War of the Arcane. After decades of bloody war, the Congregate of Ancients decided to end the war by destroying their enemies of the Vibrosyhn Empire through a ritual casting, calling upon the power of the moon and levelling the city of Hariosylth.</p>
-<p dir="auto">For this, all twelve of them gathered on Mount Aossiin to perform a ritual on a scale that has never before been seen on Calsinah.</p>
-<p dir="auto">While the casting was successful and Hariosylth was destroyed completely, leaving nothing but a vitrified track, known as the Scar of Hariosylth, behind, it drained Limihn of its essence almost completely, causing its subsequent fall.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Events/Fall of Limihn.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">Fall of Limihn</h2><h4 class="aat-card-start-date">0 AFL</h4></header><div class="aat-card-body"><p dir="auto">Fall of Limihn<br/>
-Following the ritual casting of The Moonstrike by the Congregate of Ancients and the ensuing destruction Hariosylth, Limihn, the first moon of Clasinah, lost its essence and began to fall. The Fall of Limihn therefore marks the most cataclysmic event in the modern history of Calsinah, wiping out most major kingdoms from before the fall and forcing civilization mostly underground for years to follow.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The Age of Darkness.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Age of Darkness</h2><h4 class="aat-card-start-date">From 0 AFL to 212 AFL</h4></header><div class="aat-card-body"><p dir="auto">The Age of Darkness<br/>
-The Age of Darkness is a relatiely short era in the history of Calsinah, started with the impact of Limihn on the surface. Following that event, a volcanic winter ensued, with life either being forced underground or sustained by small pockets of magic. As such, the large empires of The Age of Transformation collapsed completely and new powers started establishing themselves wherevent civilization survived.</p></div></div></a><a class="internal-link aat-card" href="9 Lore/91 History/Eras/The Resurgency.md"><div class="aat-card-text-wraper"><header class="aat-card-head-wrap"><h2 class="aat-card-title">The Resurgency</h2><h4 class="aat-card-start-date">213 AFL</h4></header><div class="aat-card-body"><p dir="auto">The Resurgency<br/>
-As the ashes started to fall and the sun could be seen again, civilization started spreading out of the mountains and magic-fueled pockets and again laying claim to larger portions of lands. In this time, many new political powers started establishing themselves, going to war with each other and trying to play for power. In some areas, where more established powers survived underground this process went more quickly and more smoothly, while in other areas it took more time and bloodshed and oftentimes is still ongoing.</p>
-<p dir="auto">The fall of Limihn having been caused by the mistakes of a small number of extremly potent mages, most socities today look upon mages of power very sceptically, often not trusting ones who ascend to power. Some powers even tightly regulate the use of magic in their lands.</p></div></div></a></div><div class="aat-timeline-root"><div class="aat-range-element" style="height: 173.998px; top: 0px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 589.947px; top: 174px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 174.987px; top: 777px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 363.962px; top: 952px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 174.935px; top: 1316px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 2330px; top: 1491px; left: 0px; background-color: var(--color-red);"></div><div class="aat-range-element" style="height: 15.8182px; top: 1681px; left: 12px; background-color: var(--color-orange);"></div><div class="aat-range-element" style="height: 364px; top: 2220px; left: 12px; background-color: var(--color-orange);"></div><div class="aat-range-element" style="height: 3.78261px; top: 2775px; left: 12px; background-color: var(--color-orange);"></div><div class="aat-range-element" style="height: 698px; top: 3123px; left: 12px; background-color: var(--color-orange);"></div><div class="aat-range-element" style="height: 159.086px; top: 3298px; left: 24px; background-color: var(--color-yellow);"></div><div class="aat-range-element" style="height: 0px; top: 3472px; left: 24px; background-color: var(--color-yellow);"></div><div class="aat-range-element" style="height: 173.183px; top: 3995px; left: 0px; background-color: var(--color-red);"></div></div></div></div>
+<!-- SerializedDataviewJS -->
+
+```mermaid
+
+timeline TD
+    section The Compounding • (200000 BFL → 90001 BFL)
+
+    section The Draconic Ages • (90000 BFL → 54001 BFL)
+        Birth of Bahamut and Tiamat • (90000 BFL) : From the essence of the elements twin deities were born. And though both stemmed from the same essence, they were like two sides of a coin. One was known as Bahamut, the Platinum Dragon, the god of justice and nobility. The other became known as Tiamat, the Queen of Chaos, goddess of wealth, greed and vengeance. The twin gods would forever oppose each other and so would their spawn.
+        Birth of Dragonkind • (80000 BFL) : From the first deities of Calsinah spawned the first sentient life. In their own image they created dragonkind. Tiamat formed the Chromatic Dragons, who follow her goals, while Bahamut created the Metallic Dragons in his likeness. Despite always opposing each other and persisting conflict, for many millennia, dragonkind would life in relativ peace and share Calsinah with each other and their forefathers of the elements.
+
+    section The Age of Divinity • (54000 BFL → 23001 BFL)
+
+    section The First Sundering • (23000 BFL → 10001 BFL)
+
+    section The High Age • (10000 BFL → 5001 BFL)
+        The Investiture • (10000 BFL) : When at the end of The First Sundering the veil between planes briefly collapsed, the land got suffused by otherworldly energy, leaving behind powerful ley lines and magically affine creatures such as the Elves, Dwarves and Gnomes got invested by the energy of other realms. In most places the veil was restored by the winning gods quickly, but in some places the veil remains broken or thinned, leaving behind gateway to other planes.
+
+    section The Second Sundering • (5000 BFL → 2301 BFL)
+
+    section The Age of Transformation • (2300 BFL → 0 AFL)
+        Arcane Revolution of Aashin • (764 BFL → 759 BFL) : The Arcane Revolution of Aashin followed the year long mistreatment of mages in the Aashin Sovereignty. In the process the Aashin royal family was executed and the Triumvirate of Lysoov was established as the new governing body. The Aashin Sovereignty was renamed to the Dominion of Riaaroshin and was ruled as a magocracy following the revolution.
+        Birth of Iahl • (709 BFL) : Iahl was a sorcerer born to tremendous power and talent. He would hone his powers relentlessly, eventuall ascending to godhood and becoming the god king of the Vibrosyhn Empire.
+        Founding of the College of Ascendancy • (621 BFL) : Among the Triumvirate of Lysoov's primary goals was the study and improvement of the arcane arts. As such, the second generation of the Triumvirate established the College of Ascendancy in Jiimar. It was established with twelve faculties, specializing in different aspects of the arcane, though they were distinct from the schools of magic as they are known today.  The college was the most prestigious institution in the Dominion of Riaaroshin and developed tremendous political influence over the time if it's existence.
+        The Extinguishment • (602 BFL → 594 BFL) : The Vibrosyhn Martial Court outlawed the use of magic for any use other than purposes of state, calling for all mages to register with the government. Any mage presumed to be using the arcane arts outside of approved uses was arrested and executed without trial. In 597 BFL the use of magic was banned completely and all mages were to be executed. Already, many of the more resourceful casters had gone into hiding, with more following after the ban. This policy would eventually lead to an uprising led by a group of exiled archmages, who had called upon Iahl to aid them, resulting in Iahl taking the Vibrosyhn throne as god king.
+        Ascension of Iahl • (598 BFL) : The powerful sorcerer Iahl was known to aid any in need using his powers. Additionally, he was well known for developing unique spells or amenities of the arcane. In 598 BFL he ascended to godhood, making him the god of progress and benevolence.
+        The Spring of Mages • (594 BFL) : Following the total ban of magic by the Vibrosyhn Martial Court and the brutal persecution of mages in the Vibrosyhn Empire, numerous mages fled and went into hiding. Iahl, who had newly ascended to godhood, was called upon by his followers to aid them. Seeing the pain caused by the Vibrosyhn Martial Court and the stop it put to progress, Iahl killed the members of the Martial Court and with a group of Archmages in hiding established himself as god king of the Vibrosyhn Empire, ushering in an age of progress and wealth.
+        Uprising of Jiimar • (431 BFL → 429 BFL) : With the College of Ascendancy growing more and more powerful, the Triumvirate of Lysoov started imposing more and more restrictions on the magic activities of the public and the development of power and the arcane arts at the college. In 431 BFL the arrest of several students of the College lead to student protests, which quickly escalated. Many faculty members, in particular the twelve heads of faculty - known as the twelve Ancients - supported the students in their protests, which resulted in the Triumvirate of Lysoov being removed from power by the Ancients in 429 BFL. The result was the establishment of the Congregate of Ancients as the new power of state. While the Triumvirate already aimed to improve the powers they wielded, the Congregate of Ancients had an agenda that pursued this goal far more ruthlessly.
+        Seizing of the Primordial Forge and Battle of Uaynahr • (339 BFL) : As the Congregate of Ancients started pursuing their goal of ultimate arcane power more and more ruthlessly, they started eyeing the achievements of the Vibrosyhn Empire under Iahl rule more and more jealously. So, eventually, the seized the Primordial Forge, one of the core achievements of research under Iahl. This lead to the Battle of Uaynahr and triggered the War of the Arcane.
+        War of the Arcane • (339 BFL → 0 AFL) : The War of the Arcane was a major, centuries long war between the Vibrosyhn Empire and the Dominion of Riaaroshin, culminating in the Fall of Limihn.
+        Siege of Quadiin • (38 BFL → 6 BFL) : The Siege of Quadiin was on of the major engagements in the War of the Arcane. Following a steady advance by the Vibrosyhn Empire on Riaaroshin positions, they eventually reached Quadiin, one of the most important cities in the Dominion of Riaaroshin. After a prolonged siege, Riaaroshin forces eventually managed to break the siege and free the city but at great cost, leaving them severely weakened.
+        Retaking of the Primordial Forge • (3 BFL → 3 BFL) : After the Siege of Quadiin, the Riaaroshin forces were left severly weakened by the battle and a large movement of troops was necessary to eventually break the siege. This allowed for the Vibrosyhn Empire to finally retake the Primordial Forge, taking away the one edge the Riaaroshin had left in the war. This loss eventually led the Congregate of Ancients to casting The Moonstrike in hopes of retaking the war.
+        The Moonstrike • (0 AFL) : The Moonstrike marked the culmination of the War of the Arcane. After decades of bloody war, the Congregate of Ancients decided to end the war by destroying their enemies of the Vibrosyhn Empire through a ritual casting, calling upon the power of the moon and levelling the city of Hariosylth. For this, all twelve of them gathered on Mount Aossiin to perform a ritual on a scale that has never before been seen on Calsinah. While the casting was successful and Hariosylth was destroyed completely, leaving nothing but a vitrified track, known as the Scar of Hariosylth, behind, it drained Limihn of its essence almost completely, causing its subsequent fall.
+        Fall of Limihn • (0 AFL) : Following the ritual casting of The Moonstrike by the Congregate of Ancients and the ensuing destruction Hariosylth, Limihn, the first moon of Clasinah, lost its essence and began to fall. The Fall of Limihn therefore marks the most cataclysmic event in the modern history of Calsinah, wiping out most major kingdoms from before the fall and forcing civilization mostly underground for years to follow.
+
+    section The Age of Darkness • (0 AFL → 212 AFL)
+
+    section The Resurgency • (213 AFL → Today)
+
+```
+
+<!-- SerializedDataviewJS END -->
 
 ## Origins
 

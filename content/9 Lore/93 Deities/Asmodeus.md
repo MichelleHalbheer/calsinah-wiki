@@ -14,7 +14,7 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-22T15:45
+date-updated: 2026-11-26T13:51
 ---
 
 ![Asmodeus](https://static.wikia.nocookie.net/forgottenrealms/images/4/42/Asmodeus_AFR.jpg)
@@ -33,10 +33,6 @@ Asmodeus, or **Asmodel** in Infernal is the god of tyranny and indulgence. He is
 - The Archfiend
 
 ## Domains
-
-```dataviewjs
-
-```
 
 <!-- DataviewJSToSerialize:
 const domains = dv.current().domains ?? [];

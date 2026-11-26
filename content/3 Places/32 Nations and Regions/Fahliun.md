@@ -15,7 +15,7 @@ organizations: []
 tags:
   - region
 date-created: 2026-11-22T15:57
-date-updated: 2026-11-22T17:23
+date-updated: 2026-11-22T18:08
 cover: "[[Fahliun_CoA.png]]"
 ---
 
@@ -47,7 +47,7 @@ For a Prime to be elected by the [[Council of the Union]], they need a majority 
 
 The current Prime of Fahliun is [[Caerthynna Herwenys]], an elven female arcanist. She has been elected with a record 8 votes and is known for her just and effective rule and for the increasing prosperity in the confederation. At the moment, she is in her fourth term as Prime, having already served for 76 years.
 
-The current Fey Regent is [[Pharom of the Silvershire]]. He has followed his mother, [[Shandalar if the Silvershire|Shandalar]], on the throne, when she abdicated in his favour after 564 years of rule, in 484 AFL. He is a competent ruler focused on the economic development of Fahliun, always trying - though not always succeeding - to better the lives of the Fahliri people.
+The current Fey Regent is [[Pharom of the Silvershire]]. He has followed his mother, [[Shandalar of the Silvershire|Shandalar]], on the throne, when she abdicated in his favour after 564 years of rule, in 484 AFL. He is a competent ruler focused on the economic development of Fahliun, always trying - though not always succeeding - to better the lives of the Fahliri people.
 
 The current king of the dwarves is [[Skaec Thunderstone]]. He was crowned king regent after the sudden death of his brother [[Elbreck Thunderstone]] in 803 AFL. He is known as a fickle and short-tempered ruler and is not well-liked by the guildmasters, the council members and the other members of the Triumvirate. Elbreck's son and legal heir to the throne, [[Vostor Thunderstone]] has come of age several years ago, but Skaec has yet to abdicate.
 

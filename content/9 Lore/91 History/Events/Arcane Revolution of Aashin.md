@@ -17,9 +17,8 @@ related_locations: []
 tags:
   - history
   - event
-  - world-anvil-import
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-17T19:02
+date-updated: 2026-11-26T12:29
 ---
 
 # Arcane Revolution of Aashin

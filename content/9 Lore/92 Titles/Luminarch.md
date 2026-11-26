@@ -11,7 +11,7 @@ tags:
   - title
   - world-anvil-import
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-20T15:16
+date-updated: 2026-11-23T15:51
 ---
 
 # Luminarch

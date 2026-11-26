@@ -15,7 +15,7 @@ organizations:
 tags:
   - settlement
 date-created: 2025-12-20T13:30
-date-updated: 2026-11-22T16:04
+date-updated: 2026-11-23T15:51
 cover: "[[City_Plan_Nebaron.jpg]]"
 ---
 
@@ -32,7 +32,7 @@ Nebaron is located on the coast of the [[Straight of Storms]] on the southwester
 
 ## Government
 
-Nebaron is ruled by the Yesellejn family as [[Luminarch]]. Luminarch [[Lura Yeselljn]] is well liked by the city's population, though she often has to struggle with several powerful individuals and organizations with their own interests. Nebaron has been ruled by [[House Yesseljn]] since its founding, with them always ensuring the prosperity and safety of the people of Nebaron.
+Nebaron is ruled by the Yesellejn family as [[Luminarch]]. Luminarch [[Lura Yeselljn]] is well liked by the city's population, though she often has to struggle with several powerful individuals and organizations with their own interests. Nebaron has been ruled by [[House Yeseljn]] since its founding, with them always ensuring the prosperity and safety of the people of Nebaron.
 
 Since [[The Resurgency]] Nebaron also serves as the seat of the [[Highbloom - Highblossom]] of [[Bravajl]], the westernmost region of Fahliun. The Highbloom has moved his seat to the outskirts of the city, from their former but now abandoned seat of [[House Trylian]] when the elves came back overground, building a quite substantial palace just outside the city walls.
 
@@ -62,7 +62,7 @@ The [[Nebaron Academy of Sorcery]] serves as a second important pillar of Nebaro
 - [[Konturei des runden Mondes Goram &amp; ko. KG]]
 - [[Nebaron Academy of Sorcery]]
 - [[Nebaron Temple of Virellaihn]]
-- [[House Yesseljn]]
+- [[House Yeseljn]]
 
 ## Important Residents
 
