@@ -73,6 +73,7 @@ plugins:
       wikilinks: true
       callouts: true
       mermaid: true
+      diagramRenderer: pele
       parseTags: true
       parseBlockReferences: true
       enableYouTubeEmbed: true
