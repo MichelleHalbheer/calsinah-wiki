@@ -27,10 +27,6 @@
     "dataviewjs": {
       "plugin": "dataview",
       "cache": false
-    },
-    "aat-vertical": {
-      "plugin": "aprils-automatic-timelines",
-      "cache": false
     }
   },
   "render-cache-dir": "publish/.render-cache"

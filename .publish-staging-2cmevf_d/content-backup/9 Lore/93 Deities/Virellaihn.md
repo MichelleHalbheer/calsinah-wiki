@@ -18,7 +18,7 @@ related_locations: []
 tags:
   - deity
 date-created: 2026-11-16T12:09
-date-updated: 2026-11-22T17:53
+date-updated: 2026-11-28T14:24
 ---
 
 # Virellaihn
@@ -73,7 +73,93 @@ The Ancient is tied to [[Tharell]], the second and smallest moon of Calsinah. It
 
 ## Worship
 
+Virellaihn is worshipped in almost every culture and is often one of the more visible deities in their respective pantheons. With the three moons of [[Calsinah]] having been visible every day throughout history a similar mythology has formed around them. With his three aspects he covers a broad range of domains and is thus often worshipped by many different people for various reasons.
+
+While the pup is not often invoked directly anymore it is still customary in many cultures to ask for the blessing of a newborn child on a day Limihn was full, for example. Similarly, the Ancient is often called upon when a loved one is dying, to safely hand them over into the care of the [[Raven Queen]]. The Alpha is often worshipped as a patron of cities or realms, as well as on occasion as a protector of soldiers.
+
+As a prime deity of the tides, Virellaihn is most often worshipped by sailors. It is customary to make an offering to each of his aspects before setting out on a voyage and after returning from one. The pup is often skipped in such ceremonies today, but the tradition holds on nonetheless.
+
 ## Clergy
+
+Virellaihn's clergy includes a wide range of different roles ranging from the traditional priests, invested clerics and paladins to midwives, oracles and sea guides in depending on the culture.
+
+The clergy is generally organised into two branches, with the priests and clerics being the sacral branch and the paladins being Virellaihn's protective and military wing. In most temples new paladin's are under the tutelage of the clergy until such time as they finish their theological training. Only then do they transfer into the leadership structure of the military. The leadership of both wings reports to the [[Moonfather - Moonmother]].
+
+### Hierarchy of the clergy
+
+```mermaid
+flowchart TD
+
+%% NODES %%%
+MFF(Moonfather - Moonmother)
+GPMF(Grandpack Father - Mother)
+PL(Primuslupus - Primalupa)
+EM(Eldermoon)
+MK(Moonkeeper)
+VP(Voice of the Pack)
+CK(Crescentkeeper)
+MG(Moonglow)
+MS(Moonsworn)
+CS(Crescentsworn)
+GPV(Grandpack Venator)
+HF(High Fang)
+FC(Fang Captain)
+GF(Greyfang)
+MF(Moonfang)
+YF(Young Fang)
+MW(Moonwarden)
+C(Cubs)
+
+SW(Sacral Wing)
+MilW(Military Wing)
+
+%% HIERARCHY %%
+MFF --&gt; SW
+	SW --&gt; GPMF
+	GPMF --&gt; PL
+		PL --&gt; Priests
+			Priests --&gt;EM
+			EM --&gt; MK
+				MK --&gt; CK
+					CK --&gt; C
+			EM --&gt; VP
+		PL --&gt; Clerics
+			Clerics --&gt; MG
+			MG --&gt; MS
+				MS --&gt; CS
+MFF --&gt; MilW
+	MilW --&gt; GPV
+	GPV --&gt; HF
+		HF --&gt; FC
+			FC --&gt; GF
+			FC --&gt; MF
+				GF --&gt; YF
+				MF --&gt; YF
+			FC --&gt; MW
+				MW --&gt; YF
+
+					YF --&gt; C
+
+%% LINKING %%
+class MFF internal-link
+class GPMF internal-link
+class PL internal-link
+class EM internal-link
+class MK internal-link
+class VP internal-link
+class CK internal-link
+class MG internal-link
+class MS internal-link
+class CS internal-link
+class GPV internal-link
+class HF internal-link
+class FC internal-link
+class GF internal-link
+class MF internal-link
+class YF internal-link
+class MW internal-link
+class C internal-link
+```
 
 ## Temples
 
