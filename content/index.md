@@ -1,11 +1,11 @@
 ---
-title: Heroes of Calsinah
+title: The Official Wiki of Calsinah
 description: Campaign notes from the world of Calsinah — its people, places, factions, and the history that shaped it.
 publish: true
 tags:
   - index
 date-created: 2026-11-12T22:00
-date-updated: 2026-11-28T14:40
+date-updated: 2026-11-28T15:18
 ---
 
 Welcome to the wiki of Calsinah, my high fantasy world and Dungeons &amp; Dragons campaign setting. On this site all relevant and public information is compiled in one place, so it serves as a reference for both you and me when playing at my table. Feel free to use the wiki at any point to refer to information that might be relevant to you.
