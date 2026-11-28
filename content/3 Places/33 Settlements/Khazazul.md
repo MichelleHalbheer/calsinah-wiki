@@ -2,7 +2,6 @@
 publish: true
 type: settlement
 tags:
-  - lore
   - settlement
 campaigns:
 region:
@@ -11,7 +10,7 @@ population:
 related_locations: []
 organizations: []
 date-created: 2026-11-16T09:55
-date-updated: 2026-11-22T17:25
+date-updated: 2026-11-28T13:16
 ---
 
 # Khazazul
